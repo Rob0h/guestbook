@@ -7,10 +7,10 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from '../client/app/modules/reducers';
 
-var express = require('express');
-var path = require('path');
-var app = express();
-var db = require('./db');
+import express from 'express';
+import path from 'path';
+let app = express();
+import db from './db';
 
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
@@ -30,8 +30,7 @@ app.use('/', express.static(path.join(__dirname, '../client')));
 app.get('*', (req, res) => {
 
   //const location = createLocation(req.url);
-  const reducer  = combineReducers(reducers);
-  const store    = createStore(reducer);
+  const store = createStore(reducers);
 
   // match the routes to the url
   match({ routes: routes, location: req.url }, (err, redirect, props) => {
