@@ -1,5 +1,5 @@
 import React from 'react';
-import {match, Route, IndexRoute } from 'react-router';
+import {Route, IndexRoute } from 'react-router';
 import Main from '../components/Main.jsx';
 import Properties from '../components/properties/propertiesContainer.jsx';
 import Analytics from '../components/analytics/analytics.jsx';

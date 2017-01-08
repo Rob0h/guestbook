@@ -8,6 +8,8 @@ import reducers from './modules/reducers';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
+let initialState = window.__INITIAL_STATE__;
+
 const store = createStore(reducers);
 
 class App extends React.Component {
