@@ -38,7 +38,19 @@ class PropertiesContainer extends React.Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    axios.get('/property/all')
+
+    axios.post('/login', {
+      email: 'bob',
+      password: 'test'
+    })
+    .then(response => {
+      console.log('response', response)
+    })
+    .catch(err => {
+      console.error('Error login', err);
+    });
+
+/*    axios.get('/property/all')
     .then(response => {
       if (response.data.length) {
         dispatch(populateProperties(response.data));
@@ -46,7 +58,7 @@ class PropertiesContainer extends React.Component {
     })
     .catch(err => {
       console.error('Error fetching properties', err);
-    });
+    });*/
   }
 
   render() {
@@ -61,6 +73,19 @@ class PropertiesContainer extends React.Component {
         <RaisedButton fullWidth={true} icon={<AddIcon />} label='Add a Property'/>
         </Card>
         <AddPropForm openHandler={this.openHandler} open={this.state.addProp}/>
+        <form action="/login" method="post">
+          <div>
+              <label>Username:</label>
+              <input type="text" name="email"/>
+          </div>
+          <div>
+              <label>Password:</label>
+              <input type="password" name="password"/>
+          </div>
+          <div>
+              <input type="submit" value="Log In"/>
+          </div>
+      </form>
       </div>
     );
   }

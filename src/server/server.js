@@ -12,12 +12,15 @@ import path from 'path';
 let app = express();
 import db from './db';
 
+import passport from 'passport';
+
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
 var bookingRouter = require('./routers/bookingRouter.js');
 
 // configure middleware
 require('./config/middleware.js')(app, express);
+require('./config/passport.js')(passport);
 
 // setup routers for users, property, and bookings
 app.use('/', userRouter);

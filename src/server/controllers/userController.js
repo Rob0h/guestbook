@@ -1,12 +1,14 @@
 var db = require('../db');
+var passport = require('passport');
 
 module.exports = {
 
   login: function(req, res, next) {
-    db.User.findOne({email: req.body.email})
-      .then(function(user) {
-        res.sendStatus(201);
-      });
+    console.log('getting to here', req.body);
+    passport.authenticate('local', {
+      successRedirect: '/', 
+      failureRedirect: '/login' 
+    });
   },
 
   register: function(req, res, next) {
