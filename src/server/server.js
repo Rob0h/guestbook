@@ -27,8 +27,8 @@ app.use('/booking', bookingRouter);
 // setup to serve static files
 app.use('/', express.static(path.join(__dirname, '../client')));
 
-app.get('*', (req, res) => {
 
+app.get('*', (req, res) => {
   //const location = createLocation(req.url);
   const store = createStore(reducers);
 
@@ -39,8 +39,13 @@ app.get('*', (req, res) => {
       console.log('Error occurred', err);
       return res.status(500).end('Internal server error');
     }
+
+    if (redirect) {
+        return res.redirect(302, redirect.pathname + redirect.search);
+    }
+
     if (!props) {
-      return res.status(404).end('Not found.');
+      app.use('/', express.static(path.join(__dirname, '../client')));
     }
 
     // `RouterContext` is what the `Router` renders. `Router` keeps these

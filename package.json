@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
+    "start:dev": "nodemon server/server.bundle.js",
+    "start": "node server/server.bundle.js",
     "dev:client": "webpack -d --watch",
     "dev:server": "webpack -d --watch --config webpack.server.config.js"
   },
