@@ -1,5 +1,6 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var db = require('../db');
 
 module.exports = function(passport) {
   passport.use('local', new LocalStrategy({
@@ -7,9 +8,8 @@ module.exports = function(passport) {
     passwordField: 'password'
   },
   function(username, password, done) {
-    console.log('user', username);
-    console.log('password', password);
-    db.User.findOne({ email: username }, function(err, user) {
+    db.User.findOne({where: { email: username }})
+    .then(function(err, user) {
       if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
@@ -18,7 +18,7 @@ module.exports = function(passport) {
         return done(null, false, { message: 'Incorrect password.' });
       }
       return done(null, user);
-    });
+    })
   }
   ));
 

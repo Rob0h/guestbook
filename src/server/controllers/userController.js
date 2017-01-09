@@ -4,11 +4,10 @@ var passport = require('passport');
 module.exports = {
 
   login: function(req, res, next) {
-    console.log('getting to here', req.body);
     passport.authenticate('local', {
       successRedirect: '/', 
-      failureRedirect: '/login' 
-    });
+      failureRedirect: '/signin' 
+    })(req, res, next);
   },
 
   register: function(req, res, next) {
