@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
+import {browserHistory} from 'react-router';
 
 import {signIn} from '../modules/actions';
 
@@ -22,6 +24,12 @@ class LoginContainer extends React.Component {
   }
 
   handleSignIn() {
+    axios.post('/login', {
+      email: this.refs.email.getValue(),
+      password: this.refs.password.getValue()
+    }).then(function(res) {
+      window.document.write(res);
+    })
     let {dispatch} = this.props;
     let user = {
       email: this.refs.email.getValue(),
@@ -51,7 +59,8 @@ class LoginContainer extends React.Component {
           ref='email'
           hintText='Email Address'
           fullWidth={true}
-        /><br />
+        />
+        <br />
         <TextField
           ref='password'
           hintText='Password'
