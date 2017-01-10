@@ -27,9 +27,7 @@ class LoginContainer extends React.Component {
     axios.post('/login', {
       email: this.refs.email.getValue(),
       password: this.refs.password.getValue()
-    }).then(function(res) {
-      window.document.write(res);
-    })
+    });
     let {dispatch} = this.props;
     let user = {
       email: this.refs.email.getValue(),

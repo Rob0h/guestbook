@@ -44,11 +44,8 @@ app.get('*', (req, res) => {
     }
 
     if (redirect) {
+      console.log('redirect', redirect);
         return res.redirect(302, redirect.pathname + redirect.search);
-    }
-
-    if (!props) {
-      app.use('/', express.static(path.join(__dirname, '../client')));
     }
 
     // `RouterContext` is what the `Router` renders. `Router` keeps these
@@ -76,6 +73,7 @@ app.get('*', (req, res) => {
         <meta charset=utf-8/>
         <title>Guestbook</title>
         <div id=app>${appHtml}</div>
+        <script src="/flare.json"></script>
         <script src="/public/bundle.js"></script>
         <script type="application/javascript">
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
