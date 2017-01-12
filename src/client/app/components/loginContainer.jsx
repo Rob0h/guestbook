@@ -1,4 +1,5 @@
 import React from 'react';
+import {render} from 'react-dom'
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {browserHistory} from 'react-router';

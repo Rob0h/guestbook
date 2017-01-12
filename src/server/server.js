@@ -13,6 +13,8 @@ let app = express();
 import db from './db';
 
 import passport from 'passport';
+import ejs from 'ejs';
+
 
 var userRouter = require('./routers/userRouter.js');
 var propertyRouter = require('./routers/propertyRouter.js');
@@ -27,6 +29,8 @@ app.use('/', userRouter);
 app.use('/property', propertyRouter);
 app.use('/booking', bookingRouter);
 
+app.set('view engine', 'ejs');
+
 // setup to serve static files
 app.use('/', express.static(path.join(__dirname, '../client')));
 
@@ -37,7 +41,7 @@ app.get('*', (req, res) => {
 
   // match the routes to the url
   match({ routes: routes, location: req.url }, (err, redirect, props) => {
-
+    console.log('matching url');
     if (err) {
       console.log('Error occurred', err);
       return res.status(500).end('Internal server error');
@@ -81,7 +85,7 @@ app.get('*', (req, res) => {
        `
     };
     
-    res.send(renderPage());
+    res.render(renderPage());
   });
 });
 

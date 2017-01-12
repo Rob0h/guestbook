@@ -27,7 +27,11 @@ var config = {
       {
         test : /\.jsx?/,
         loader : 'babel'
-      }
+      },
+      { 
+        test: /\.ejs$/, 
+        loader: 'ejs-loader?variable=data'
+      },
     ]
   }
 };
